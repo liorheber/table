@@ -13,7 +13,15 @@ export class Resize extends Component {
   }
 
   render() {
-    return <div className={this.resizeStyle} />;
+    const { onDragStart, onDragEnd } = this.props;
+    return (
+      <div
+        className={this.resizeStyle}
+        draggable={true}
+        onDragStart={onDragStart}
+        onDragEnd={onDragEnd}
+      />
+    );
   }
 }
 

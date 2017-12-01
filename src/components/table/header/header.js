@@ -21,6 +21,8 @@ export class Header extends Component {
     super(props, context);
     this.onSort = this.onSort.bind(this);
     this.onFilter = this.onFilter.bind(this);
+    this.onHeaderResizeStart = this.onHeaderResizeStart.bind(this);
+    this.onHeaderResizeEnd = this.onHeaderResizeEnd.bind(this);
     this.state = {
       headerStyle: classnames(styles.header),
       headerWrapperStyle: classnames(styles.header_wrapper)
@@ -38,6 +40,22 @@ export class Header extends Component {
       }
     };
     onSort({ columnId, direction: getDirection(direction) });
+  }
+
+  onHeaderResizeStart(event) {
+    this.currentDrag = event.clientX;
+  }
+
+  onHeaderResizeEnd(event) {
+    const { columnId, width, minWidth = 60 } = this.props;
+    const { onHeaderResize } = this.context;
+    const finalWidth = Math.max(
+      minWidth,
+      width + event.clientX - this.currentDrag
+    );
+    onHeaderResize({ columnId, width: finalWidth });
+    event.preventDefault();
+    event.stopPropagation();
   }
 
   onFilter() {
@@ -65,7 +83,12 @@ export class Header extends Component {
             onFilter={this.onFilter}
           />
         </div>
-        {resizable && <Resize />}
+        {resizable && (
+          <Resize
+            onDragStart={this.onHeaderResizeStart}
+            onDragEnd={this.onHeaderResizeEnd}
+          />
+        )}
       </div>
     );
   }
@@ -84,7 +107,8 @@ Header.propTypes = {
 
 Header.contextTypes = {
   onSort: PropTypes.func,
-  onFilter: PropTypes.func
+  onFilter: PropTypes.func,
+  onHeaderResize: PropTypes.func
 };
 
 export default Header;

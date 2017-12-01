@@ -11,13 +11,15 @@ export class Table extends Component {
     columns: [],
     rows: [],
     getCell: () => null,
-    getHeader: () => null
+    getHeader: () => null,
+    onColumnResize: () => null
   };
 
   constructor(props, context) {
     super(props, context);
     this.onSort = this.onSort.bind(this);
     this.onFilter = this.onFilter.bind(this);
+    this.onHeaderResize = this.onHeaderResize.bind(this);
     this.state = {
       columns: []
     };
@@ -26,7 +28,8 @@ export class Table extends Component {
   getChildContext() {
     return {
       onSort: this.onSort,
-      onFilter: this.onFilter
+      onFilter: this.onFilter,
+      onHeaderResize: this.onHeaderResize
     };
   }
 
@@ -45,11 +48,17 @@ export class Table extends Component {
   }
 
   onSort({ columnId, direction }) {
-    console.log({ columnId, direction });
+    const { onSort } = this.props;
+    onSort && onSort({ columnId, direction });
   }
 
   onFilter() {
     console.log("filter");
+  }
+
+  onHeaderResize({ columnId, width }) {
+    const { onColumnResize } = this.props;
+    onColumnResize && onColumnResize({ columnId, width });
   }
 
   render() {
@@ -77,14 +86,16 @@ export class Table extends Component {
 
 Table.childContextTypes = {
   onSort: PropTypes.func,
-  onFilter: PropTypes.func
+  onFilter: PropTypes.func,
+  onHeaderResize: PropTypes.func
 };
 
 Table.propTypes = {
   columns: PropTypes.array,
   rows: PropTypes.array,
   getCell: PropTypes.func,
-  getHeader: PropTypes.func
+  getHeader: PropTypes.func,
+  onColumnResize: PropTypes.func
 };
 
 export default Table;
