@@ -13,7 +13,16 @@ export class FixedArea extends Component {
   }
 
   render() {
-    return <div className={this.fixedAreaStyle}>{this.props.children}</div>;
+    const { isHover, children } = this.props;
+    return (
+      <div className={this.fixedAreaStyle}>
+        {React.Children.map(children, child =>
+          React.cloneElement(child, {
+            isHover
+          })
+        )}
+      </div>
+    );
   }
 }
 

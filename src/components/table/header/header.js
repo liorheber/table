@@ -22,7 +22,8 @@ export class Header extends Component {
     this.onSort = this.onSort.bind(this);
     this.onFilter = this.onFilter.bind(this);
     this.state = {
-      headerStyle: classnames(styles.header)
+      headerStyle: classnames(styles.header),
+      headerWrapperStyle: classnames(styles.header_wrapper)
     };
   }
 
@@ -53,15 +54,17 @@ export class Header extends Component {
       Header,
       isHover
     } = this.props;
-    const { headerStyle } = this.state;
+    const { headerStyle, headerWrapperStyle } = this.state;
     return (
       <div className={headerStyle} style={{ width }}>
-        <Header
-          isHover={isHover}
-          value={getLabel(columnId)}
-          onSort={this.onSort}
-          onFilter={this.onFilter}
-        />
+        <div className={headerWrapperStyle}>
+          <Header
+            isHover={isHover}
+            value={getLabel(columnId)}
+            onSort={this.onSort}
+            onFilter={this.onFilter}
+          />
+        </div>
         {resizable && <Resize />}
       </div>
     );

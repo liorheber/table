@@ -3,6 +3,8 @@ import ReactDOM from "react-dom";
 
 import columns from "./columns";
 
+import Header from "./header";
+
 import Table from "./components/table/table";
 
 class App extends PureComponent {
@@ -12,11 +14,7 @@ class App extends PureComponent {
 }
 
 const getHeader = type => {
-  return Head;
+  return Header;
 };
-
-const Head = ({ value, isHover, onFilter, onSort }) => (
-  <div onClick={onSort}>{value}</div>
-);
 
 ReactDOM.render(<App />, document.querySelector(".app-container"));

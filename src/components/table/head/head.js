@@ -31,7 +31,7 @@ export class Head extends Component {
     return (
       <div
         onMouseEnter={this.onMouseEnter}
-        onMouseLeave={this.onMouseEnter}
+        onMouseLeave={this.onMouseLeave}
         className={this.headStyle}
       >
         {React.Children.map(children, child =>
