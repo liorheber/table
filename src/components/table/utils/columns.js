@@ -1,16 +1,16 @@
-export const enrichColumns = ({ columns, cellRenderers, headerRenderers }) =>
+export const enrichColumns = ({ columns, getCell, getHeader }) =>
   columns
-    .map(column => addHeader({ column, headerRenderers }))
-    .map(column => addCell({ column, cellRenderers }));
+    .map(column => addHeader({ column, getHeader }))
+    .map(column => addCell({ column, getCell }));
 
-const addHeader = ({ column, headerRenderers }) => {
+const addHeader = ({ column, getHeader }) => {
   const newColumn = Object.assign([], column);
-  newColumn.header = headerRenderers[column.type];
+  newColumn.Header = getHeader(column.type);
   return newColumn;
 };
 
-const addCell = ({ column, cellRenderers }) => {
+const addCell = ({ column, getCell }) => {
   const newColumn = Object.assign([], column);
-  newColumn.cell = cellRenderers[column.type];
+  newColumn.Cell = getCell(column.type);
   return newColumn;
 };

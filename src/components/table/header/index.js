@@ -22,10 +22,10 @@ export class Header extends Component {
   }
 
   render() {
-    const { getLabel, columnId, width, resizable } = this.props;
+    const { getLabel, columnId, width, resizable, Header } = this.props;
     return (
       <div className={this.headerStyle} style={{ width }}>
-        {getLabel(columnId)}
+        <Header>{getLabel(columnId)}</Header>
         {resizable && <Resize />}
       </div>
     );

@@ -10,26 +10,33 @@ export class Table extends Component {
   static defaultProps = {
     columns: [],
     rows: [],
-    cellRenderers: {},
-    headerRenderers: {}
+    getCell: () => null,
+    getHeader: () => null
   };
 
-  componentDidMount(props) {
-    const { columns, cellRenderers, headerRenderers } = this.props;
+  constructor(props) {
+    super(props);
+    this.state = {
+      columns: []
+    };
+  }
+
+  componentDidMount() {
+    const { columns, getCell, getHeader } = this.props;
     this.setState({
-      columns: enrichColumns({ columns, cellRenderers, headerRenderers })
+      columns: enrichColumns({ columns, getCell, getHeader })
     });
   }
 
-  componentWillReceiveProps(props) {
-    const { columns, cellRenderers, headerRenderers } = this.props;
+  componentWillReceiveProps() {
+    const { columns, getCell, getHeader } = this.props;
     this.setState({
-      columns: enrichColumns({ columns, cellRenderers, headerRenderers })
+      columns: enrichColumns({ columns, getCell, getHeader })
     });
   }
 
   render() {
-    const { columns } = this.props;
+    const { columns } = this.state;
     const fixedColumns = columns.filter(({ fixed }) => fixed);
     const nonFixedColumns = columns.filter(({ fixed }) => !fixed);
     return (
@@ -54,8 +61,8 @@ export class Table extends Component {
 Table.propTypes = {
   columns: PropTypes.array,
   rows: PropTypes.array,
-  cellRenderers: PropTypes.object,
-  headerRenderers: PropTypes.object
+  getCell: PropTypes.func,
+  getHeader: PropTypes.func
 };
 
 export default Table;
