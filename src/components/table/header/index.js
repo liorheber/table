@@ -2,6 +2,8 @@ import React, { Component } from "react";
 import classnames from "classnames";
 import PropTypes from "prop-types";
 
+import Resize from "./resize";
+
 import styles from "./header.scss";
 
 export class Header extends Component {
@@ -10,7 +12,8 @@ export class Header extends Component {
     width: 150,
     sortable: false,
     filterable: false,
-    movable: false
+    movable: false,
+    fixed: false
   };
 
   constructor(props) {
@@ -19,10 +22,11 @@ export class Header extends Component {
   }
 
   render() {
-    const { getLabel, columnId, width } = this.props;
+    const { getLabel, columnId, width, fixed } = this.props;
     return (
       <div className={this.headerStyle} style={{ width }}>
         {getLabel(columnId)}
+        {!fixed && <Resize />}
       </div>
     );
   }
@@ -34,7 +38,8 @@ Header.propTypes = {
   width: PropTypes.number,
   sortable: PropTypes.bool,
   filterable: PropTypes.bool,
-  movable: PropTypes.bool
+  movable: PropTypes.bool,
+  fixed: PropTypes.bool
 };
 
 export default Header;
