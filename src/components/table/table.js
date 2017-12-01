@@ -1,8 +1,8 @@
 import React, { Component, Fragment } from "react";
 import PropTypes from "prop-types";
-import Head from "./head";
-import Header from "./header";
-import FixedArea from "./fixed_area";
+import Head from "./head/head";
+import Header from "./header/header";
+import FixedArea from "./fixed_area/fixed_area";
 
 import { enrichColumns } from "./utils/columns";
 

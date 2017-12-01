@@ -3,7 +3,7 @@ import ReactDOM from "react-dom";
 
 import columns from "./columns";
 
-import Table from "./components/table";
+import Table from "./components/table/table";
 
 class App extends PureComponent {
   render() {
