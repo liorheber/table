@@ -1,7 +1,8 @@
 export default [
   {
     columnId: "Column1",
-    fixed: true
+    fixed: true,
+    resizable: false
   },
   {
     columnId: "Column2",

@@ -13,7 +13,7 @@ export class Header extends Component {
     sortable: false,
     filterable: false,
     movable: false,
-    fixed: false
+    resizable: true
   };
 
   constructor(props) {
@@ -22,11 +22,11 @@ export class Header extends Component {
   }
 
   render() {
-    const { getLabel, columnId, width, fixed } = this.props;
+    const { getLabel, columnId, width, resizable } = this.props;
     return (
       <div className={this.headerStyle} style={{ width }}>
         {getLabel(columnId)}
-        {!fixed && <Resize />}
+        {resizable && <Resize />}
       </div>
     );
   }
@@ -39,7 +39,7 @@ Header.propTypes = {
   sortable: PropTypes.bool,
   filterable: PropTypes.bool,
   movable: PropTypes.bool,
-  fixed: PropTypes.bool
+  resizable: PropTypes.bool
 };
 
 export default Header;

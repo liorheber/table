@@ -21,11 +21,11 @@ export class Table extends Component {
         <Head>
           <FixedArea>
             {fixedColumns.map(column => (
-              <Header key={column.columnId} columnId={column.columnId} />
+              <Header key={column.columnId} {...column} />
             ))}
           </FixedArea>
           {nonFixedColumns.map(column => (
-            <Header key={column.columnId} columnId={column.columnId} />
+            <Header key={column.columnId} {...column} />
           ))}
         </Head>
         <div>Body</div>
