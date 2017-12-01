@@ -15,6 +15,8 @@ const getHeader = type => {
   return Head;
 };
 
-const Head = ({ value, isHover }) => <div>{value}</div>;
+const Head = ({ value, isHover, onFilter, onSort }) => (
+  <div onClick={onSort}>{value}</div>
+);
 
 ReactDOM.render(<App />, document.querySelector(".app-container"));

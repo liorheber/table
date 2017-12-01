@@ -14,10 +14,19 @@ export class Table extends Component {
     getHeader: () => null
   };
 
-  constructor(props) {
-    super(props);
+  constructor(props, context) {
+    super(props, context);
+    this.onSort = this.onSort.bind(this);
+    this.onFilter = this.onFilter.bind(this);
     this.state = {
       columns: []
+    };
+  }
+
+  getChildContext() {
+    return {
+      onSort: this.onSort,
+      onFilter: this.onFilter
     };
   }
 
@@ -33,6 +42,14 @@ export class Table extends Component {
     this.setState({
       columns: enrichColumns({ columns, getCell, getHeader })
     });
+  }
+
+  onSort({ columnId, direction }) {
+    console.log({ columnId, direction });
+  }
+
+  onFilter() {
+    console.log("filter");
   }
 
   render() {
@@ -57,6 +74,11 @@ export class Table extends Component {
     );
   }
 }
+
+Table.childContextTypes = {
+  onSort: PropTypes.func,
+  onFilter: PropTypes.func
+};
 
 Table.propTypes = {
   columns: PropTypes.array,
