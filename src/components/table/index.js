@@ -1,5 +1,6 @@
 import React, { Component, Fragment } from "react";
 import PropTypes from "prop-types";
+import Head from "./head";
 import Header from "./header";
 
 export class Table extends Component {
@@ -14,11 +15,11 @@ export class Table extends Component {
     const { columns } = this.props;
     return (
       <Fragment>
-        <div>
+        <Head>
           {columns.map(column => (
             <Header key={column.columnId} columnId={column.columnId} />
           ))}
-        </div>
+        </Head>
         <div>Body</div>
         <div>Footer</div>
       </Fragment>
