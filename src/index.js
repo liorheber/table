@@ -15,6 +15,6 @@ const getHeader = type => {
   return Head;
 };
 
-const Head = ({ children }) => <div>{children}</div>;
+const Head = ({ value, isHover }) => <div>{value}</div>;
 
 ReactDOM.render(<App />, document.querySelector(".app-container"));

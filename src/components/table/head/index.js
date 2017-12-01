@@ -9,11 +9,38 @@ export class Head extends Component {
 
   constructor(props) {
     super(props);
+    this.onMouseEnter = this.onMouseEnter.bind(this);
+    this.onMouseLeave = this.onMouseLeave.bind(this);
     this.headStyle = classnames(styles.head);
+    this.state = {
+      isHover: false
+    };
+  }
+
+  onMouseEnter() {
+    this.setState({ isHover: true });
+  }
+
+  onMouseLeave() {
+    this.setState({ isHover: false });
   }
 
   render() {
-    return <div className={this.headStyle}>{this.props.children}</div>;
+    const { children } = this.props;
+    const { isHover } = this.state;
+    return (
+      <div
+        onMouseEnter={this.onMouseEnter}
+        onMouseLeave={this.onMouseEnter}
+        className={this.headStyle}
+      >
+        {React.Children.map(children, child =>
+          React.cloneElement(child, {
+            isHover
+          })
+        )}
+      </div>
+    );
   }
 }
 
