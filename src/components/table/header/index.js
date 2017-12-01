@@ -12,8 +12,8 @@ export class Header extends Component {
   };
 
   render() {
-    const { getLabel, columnId } = this.props;
-    return <div>{getLabel(columnId)}</div>;
+    const { getLabel, columnId, width } = this.props;
+    return <div style={{ width }}>{getLabel(columnId)}</div>;
   }
 }
 
