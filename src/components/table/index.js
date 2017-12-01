@@ -4,6 +4,8 @@ import Head from "./head";
 import Header from "./header";
 import FixedArea from "./fixed_area";
 
+import { enrichColumns } from "./utils/columns";
+
 export class Table extends Component {
   static defaultProps = {
     columns: [],
@@ -11,6 +13,20 @@ export class Table extends Component {
     cellRenderers: {},
     headerRenderers: {}
   };
+
+  componentDidMount(props) {
+    const { columns, cellRenderers, headerRenderers } = this.props;
+    this.setState({
+      columns: enrichColumns({ columns, cellRenderers, headerRenderers })
+    });
+  }
+
+  componentWillReceiveProps(props) {
+    const { columns, cellRenderers, headerRenderers } = this.props;
+    this.setState({
+      columns: enrichColumns({ columns, cellRenderers, headerRenderers })
+    });
+  }
 
   render() {
     const { columns } = this.props;
