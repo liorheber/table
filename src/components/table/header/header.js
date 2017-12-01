@@ -8,7 +8,6 @@ import styles from "./header.scss";
 
 export class Header extends Component {
   static defaultProps = {
-    getLabel: columnId => columnId,
     width: 150,
     sortable: false,
     filterable: false,
@@ -64,23 +63,16 @@ export class Header extends Component {
   }
 
   render() {
-    const {
-      getLabel,
-      columnId,
-      width,
-      resizable,
-      Header,
-      isHover
-    } = this.props;
+    const { width, resizable, Header, isHover, ...props } = this.props;
     const { headerStyle, headerWrapperStyle } = this.state;
     return (
       <div className={headerStyle} style={{ width }}>
         <div className={headerWrapperStyle}>
           <Header
             isHover={isHover}
-            value={getLabel(columnId)}
             onSort={this.onSort}
             onFilter={this.onFilter}
+            {...props}
           />
         </div>
         {resizable && (
@@ -96,7 +88,6 @@ export class Header extends Component {
 
 Header.propTypes = {
   columnId: PropTypes.string.isRequired,
-  getLabel: PropTypes.func,
   width: PropTypes.number,
   sortable: PropTypes.bool,
   filterable: PropTypes.bool,
