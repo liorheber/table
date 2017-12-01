@@ -2,6 +2,7 @@ import React, { Component, Fragment } from "react";
 import PropTypes from "prop-types";
 import Head from "./head";
 import Header from "./header";
+import FixedArea from "./fixed_area";
 
 export class Table extends Component {
   static defaultProps = {
@@ -13,10 +14,17 @@ export class Table extends Component {
 
   render() {
     const { columns } = this.props;
+    const fixedColumns = columns.filter(({ fixed }) => fixed);
+    const nonFixedColumns = columns.filter(({ fixed }) => !fixed);
     return (
       <Fragment>
         <Head>
-          {columns.map(column => (
+          <FixedArea>
+            {fixedColumns.map(column => (
+              <Header key={column.columnId} columnId={column.columnId} />
+            ))}
+          </FixedArea>
+          {nonFixedColumns.map(column => (
             <Header key={column.columnId} columnId={column.columnId} />
           ))}
         </Head>

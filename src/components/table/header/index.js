@@ -10,8 +10,7 @@ export class Header extends Component {
     width: 150,
     sortable: false,
     filterable: false,
-    movable: false,
-    fixed: false
+    movable: false
   };
 
   constructor(props) {
@@ -35,8 +34,7 @@ Header.propTypes = {
   width: PropTypes.number,
   sortable: PropTypes.bool,
   filterable: PropTypes.bool,
-  movable: PropTypes.bool,
-  fixed: PropTypes.bool
+  movable: PropTypes.bool
 };
 
 export default Header;

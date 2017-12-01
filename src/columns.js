@@ -1,9 +1,11 @@
 export default [
   {
-    columnId: "Column1"
+    columnId: "Column1",
+    fixed: true
   },
   {
-    columnId: "Column2"
+    columnId: "Column2",
+    fixed: true
   },
   {
     columnId: "Column3"
